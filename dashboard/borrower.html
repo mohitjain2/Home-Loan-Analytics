@@ -2,26 +2,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Dashboard - Loan Insight</title>
-    <link rel="stylesheet" href="resources/css/customerview.css">
+    <title>Borrower Risk Prediction</title>
+    <!--Will need to change below-->
+    <link rel="stylesheet" href="resources/css/predictions.css">
 
 </head>
 <body>
+    <div class="header">
+        <h3>Borrower Risk</h3>
+        <a href="index.html">Home</a>
+    </div>
+
     <div class="container">
-        <h2>Customer Dashboard</h2>
-        <p>Welcome to the Loan Insight Customer Portal. Use our tools to explore loan approval chances, interest rates, and property values.</p>
-        
-        <div class="option">
-            <a href="loan_approval.html">Loan Approval Prediction</a>
+        <h2>User Dashboard</h2>
+        <p>Welcome to the Loan Insight Prediction Portal. Use our tools to explore borrower risk chances.</p>
+        <!-- Input Boxes -->
+        <div class="input-boxes">
+            <div class="input-box">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name">
+            </div>
+
+            <div class="input-box">
+                <label for="income">Annual Income</label>
+                <input type="number" id="income" placeholder="Enter your annual income">
+            </div>
+
+            <div class="input-box">
+                <label for="loanAmount">Loan Amount</label>
+                <input type="number" id="loanAmount" placeholder="Enter loan amount">
+            </div>
+
+            <div class="input-box">
+                <label for="creditScore">Credit Score</label>
+                <input type="number" id="creditScore" placeholder="Enter your credit score">
+            </div>
+
+            <div class="input-box">
+                <label for="propertyValue">Property Value</label>
+                <input type="number" id="propertyValue" placeholder="Enter property value">
+            </div>
         </div>
-        
-        <div class="option">
-            <a href="interest_rate.html">Loan Interest Rate Prediction</a>
-        </div>
-        
-        <div class="option">
-            <a href="property_value.html">Predicting Property Value for Loan Applicants</a>
-        </div>
+
+        <!-- Submit Button -->
+        <button class="submit-btn">Submit</button>
+
+
     </div>
 </body>
 </html>
