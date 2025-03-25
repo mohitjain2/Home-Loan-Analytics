@@ -5,46 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loan Predictive Analytics</title>
+    <link rel="stylesheet" href="resources/css/feed.css">
+    <script type = "text/javascript" src = "resources/scripts/feed.js"></script>
 </head>
 <body onload = "handleOnLoad()">
     
-    <!--Reading in NULL values-->
-
-    <head>
-        <link rel="stylesheet" href="resources/css/feed.css">
-        <title>Sign in</title>
-    </head>
-    
     <div class="header">
-        <h3>Loan Predictiction Analytics</h3>
+        <h3>Loan Prediction Analytics</h3>
         <div class="header-right">
             <a class="active" href = "index.html">Home</a>
-            <!--Instead of dealing with a login right now, this just takes directly to bankview-->
-            <a href="bankview.html">Bank</a>
-            <!--Instead of dealing with a login right now, this just takes directly to customer view-->
-            <a href="customerview.html">Customer</a>
+            <a href="dashboard.html">Dashboards</a>
         </div>
-        </div>
+    </div>
 
-<div class="row">
-<div class = "rightcolumn">
-<div id = "feed">
-    <ul>
-    </ul>
-</div>
+    <div class="sidebar">
+        <a href="loanapproval.html" data-label="Approval">Loan Approval</a>
+        <a href="loaninterest.html" data-label="Interest">Interest Rate</a>
+        <a href="propertyvalue.html" data-label="Property">Property Value</a>
+        <a href="borrower.html" data-label="Risk">Borrower Risk</a>
+    </div>
 
-
-
-
-</div>
-
-
-<head>
-    <title>About Us - Loan Insight</title>
-    <link rel="stylesheet" href="resources/css/feed.css">
-    
-</head>
-<body>
     <div class="container">
         <h2>About Us</h2>
         <div class="image-container">
@@ -66,10 +46,12 @@
             <li><strong>Data-Driven Decisions:</strong> Harness the power of data to make smarter, faster decisions for both borrowers and lenders.</li>
         </ul>
     </div>
-    </div>
+
+
+    
 
 </div>
 </div>
-<script type = "text/javascript" src = "resources/scripts/feed.js"></script>
+
 </body>
 </html>
