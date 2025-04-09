@@ -16,38 +16,275 @@
     <div class="container">
         <h2>User Dashboard</h2>
         <p>Welcome to the Loan Insight Prediction Portal. Use our tools to explore borrower risk chances.</p>
-        <!-- Input Boxes -->
         <div class="input-boxes">
+
+            <!-- First Name -->
             <div class="input-box">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" placeholder="Enter your full name">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" placeholder="Enter your first name">
             </div>
 
+            <!-- Last Name -->
             <div class="input-box">
-                <label for="income">Annual Income</label>
-                <input type="number" id="income" placeholder="Enter your annual income">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" placeholder="Enter your last name">
             </div>
 
-            <div class="input-box">
-                <label for="loanAmount">Loan Amount</label>
-                <input type="number" id="loanAmount" placeholder="Enter loan amount">
-            </div>
-
+            <!-- Credit Score -->
             <div class="input-box">
                 <label for="creditScore">Credit Score</label>
                 <input type="number" id="creditScore" placeholder="Enter your credit score">
             </div>
 
+            <!-- 1. Loan Amount -->
+            <div class="input-box">
+                <label for="loanAmount">Loan Amount</label>
+                <input type="number" id="loanAmount" placeholder="Enter loan amount">
+            </div>
+
+            <!-- 2. Loan-to-Value Ratio -->
+            <div class="input-box">
+                <label for="loanToValue">Loan-to-Value Ratio</label>
+                <input type="number" id="loanToValue" placeholder="Enter LTV ratio">
+            </div>
+
+            <!-- 3. Interest Rate -->
+            <div class="input-box">
+                <label for="interestRate">Interest Rate</label>
+                <input type="number" id="interestRate" placeholder="Enter interest rate">
+            </div>
+
+            <!-- 4. Loan Term -->
+            <div class="input-box">
+                <label for="loanTerm">Loan Term (months)</label>
+                <input type="number" id="loanTerm" placeholder="Enter loan term in months">
+            </div>
+
+            <!-- 5. Property Value -->
             <div class="input-box">
                 <label for="propertyValue">Property Value</label>
                 <input type="number" id="propertyValue" placeholder="Enter property value">
+            </div>
+
+            <!-- 6. Total Units -->
+            <div class="input-box">
+                <label for="totalUnits">Total Units</label>
+                <input type="number" id="totalUnits" placeholder="Enter total units on property">
+            </div>
+
+            <!-- 7. Income -->
+            <div class="input-box">
+                <label for="income">Annual Income</label>
+                <input type="number" id="income" placeholder="Enter your income">
+            </div>
+
+            <!-- 8. Tract Population -->
+            <div class="input-box">
+                <label for="tractPopulation">Tract Population</label>
+                <input type="number" id="tractPopulation" placeholder="Population in your census tract">
+            </div>
+
+            <!-- 9. Tract Minority Population % -->
+            <div class="input-box">
+                <label for="tractMinorityPercent">Tract Minority Population %</label>
+                <input type="number" id="tractMinorityPercent" placeholder="e.g. 35 for 35%">
+            </div>
+
+            <!-- 10. FFIEC Median Family Income -->
+            <div class="input-box">
+                <label for="medianFamilyIncome">Median Family Income (MSA)</label>
+                <input type="number" id="medianFamilyIncome" placeholder="Enter MSA family income">
+            </div>
+
+            <!-- 11. Tract-to-MSA Income % -->
+            <div class="input-box">
+                <label for="tractToMsaIncome">Tract-to-MSA Income %</label>
+                <input type="number" id="tractToMsaIncome" placeholder="e.g. 85 for 85%">
+            </div>
+
+            <!-- 12. Owner Occupied Units -->
+            <div class="input-box">
+                <label for="ownerOccupied">Owner Occupied Units</label>
+                <input type="number" id="ownerOccupied" placeholder="Enter number of occupied units">
+            </div>
+
+            <!-- 13. Median Age of Housing -->
+            <div class="input-box">
+                <label for="medianAge">Median Age of Housing Units</label>
+                <input type="number" id="medianAge" placeholder="Enter median housing age">
+            </div>
+
+            <!-- 14. Purchaser Type -->
+            <div class="input-box">
+                <label for="purchaserType">Purchaser Type</label>
+                <select id="purchaserType">
+                    <option value="">Select</option>
+                    <option value="0">0 - Not originated/sold</option>
+                    <option value="1">1 - Fannie Mae</option>
+                    <option value="2">2 - Ginnie Mae</option>
+                    <option value="3">3 - Freddie Mac</option>
+                    <option value="4">4 - Farmer Mac</option>
+                    <option value="5">5 - Private Securitization</option>
+                    <option value="6">6 - Bank/Credit Union</option>
+                    <option value="7">7 - Insurance Company</option>
+                    <option value="8">8 - Affiliate Institution</option>
+                    <option value="9">9 - Other</option>
+                </select>
+            </div>
+
+            <!-- 15. Applicant Credit Score Type -->
+            <div class="input-box">
+                <label for="applicantCreditScore">Applicant Credit Score Type</label>
+                <select id="applicantCreditScore">
+                    <option value="">Select</option>
+                    <option value="1">1 - Equifax Beacon 5.0</option>
+                    <option value="2">2 - Experian FICO</option>
+                    <option value="3">3 - TransUnion FICO</option>
+                    <option value="4">4 - VantageScore 2.0</option>
+                    <option value="5">5 - VantageScore 3.0</option>
+                    <option value="6">6 - Other</option>
+                    <option value="7">7 - Not provided</option>
+                    <option value="8">8 - Not applicable</option>
+                </select>
+            </div>
+
+            <!-- 16. Co-Applicant Credit Score Type -->
+            <div class="input-box">
+                <label for="coApplicantCreditScore">Co-Applicant Credit Score Type</label>
+                <select id="coApplicantCreditScore">
+                    <option value="">Select</option>
+                    <option value="1">1 - Equifax Beacon 5.0</option>
+                    <option value="2">2 - Experian FICO</option>
+                    <option value="3">3 - TransUnion FICO</option>
+                    <option value="4">4 - VantageScore 2.0</option>
+                    <option value="5">5 - VantageScore 3.0</option>
+                    <option value="6">6 - Other</option>
+                    <option value="7">7 - Not provided</option>
+                    <option value="8">8 - Not applicable</option>
+                </select>
+            </div>
+
+            <!-- 17-27: All Yes/No Dropdowns -->
+            <div class="input-box">
+                <label for="preapproval">Preapproval</label>
+                <select id="preapproval">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="negativeAmortization">Negative Amortization</label>
+                <select id="negativeAmortization">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="interestOnly">Interest Only Payment</label>
+                <select id="interestOnly">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="balloonPayment">Balloon Payment</label>
+                <select id="balloonPayment">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="otherFeatures">Other Nonamortizing Features</label>
+                <select id="otherFeatures">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="applicantAge62">Applicant Age ≥ 62</label>
+                <select id="applicantAge62">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="coApplicantAge62">Co-Applicant Age ≥ 62</label>
+                <select id="coApplicantAge62">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="fhaLien">FHA: First Lien</label>
+                <select id="fhaLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="fsaLien">FSA/RHS: First Lien</label>
+                <select id="fsaLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="vaLien">VA: First Lien</label>
+                <select id="vaLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="multifamilyDwelling">Multifamily: Site-Built</label>
+                <select id="multifamilyDwelling">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="openEndCredit">Open-end Line of Credit</label>
+                <select id="openEndCredit">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="reverseMortgage">Reverse Mortgage</label>
+                <select id="reverseMortgage">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
             </div>
         </div>
 
         <!-- Submit Button -->
         <button class="submit-btn">Submit</button>
-
-
     </div>
 </body>
 </html>
