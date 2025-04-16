@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrower Risk Prediction</title>
     <!--Will need to change below-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="resources/css/predictions.css">
 
 </head>
@@ -68,8 +69,8 @@
 
             <!-- 6. Total Units -->
             <div class="input-box">
-                <label for="totalUnits">Total Units</label>
-                <input type="number" id="totalUnits" placeholder="Enter total units on property">
+                <label for="debt_to_income_ratio">Debt to Income ratio</label>
+                <input type="number" id="debt_to_income_ratio" placeholder="Enter Debt to Income ratio">
             </div>
 
             <!-- 7. Income -->
@@ -78,10 +79,29 @@
                 <input type="number" id="income" placeholder="Enter your income">
             </div>
 
-            <!-- 8. Tract Population -->
             <div class="input-box">
-                <label for="tractPopulation">Tract Population</label>
-                <input type="number" id="tractPopulation" placeholder="Population in your census tract">
+                <label for="rate_spread">Rate Spread</label>
+                <input type="number" id="rate_spread" placeholder="Enter Rate Spread">
+            </div>
+
+            <div class="input-box">
+                <label for="total_loan_costs">Total Loan costs</label>
+                <input type="number" id="total_loan_costs" placeholder="Enter Total Loan costs">
+            </div>
+
+            <div class="input-box">
+                <label for="origination_charges">Origination charges</label>
+                <input type="number" id="origination_charges" placeholder="Enter Origination charges">
+            </div>
+
+            <div class="input-box">
+                <label for="co-applicant_age">Co-Applicant age</label>
+                <input type="number" id="co-applicant_age" placeholder="Enter Co-Applicant age">
+            </div>
+
+            <div class="input-box">
+                <label for="derived_msa-md">Derived msa-md</label>
+                <input type="number" id="co-derived_msa-md" placeholder="Enter Derived msa-md">
             </div>
 
             <!-- 9. Tract Minority Population % -->
@@ -94,42 +114,6 @@
             <div class="input-box">
                 <label for="medianFamilyIncome">Median Family Income (MSA)</label>
                 <input type="number" id="medianFamilyIncome" placeholder="Enter MSA family income">
-            </div>
-
-            <!-- 11. Tract-to-MSA Income % -->
-            <div class="input-box">
-                <label for="tractToMsaIncome">Tract-to-MSA Income %</label>
-                <input type="number" id="tractToMsaIncome" placeholder="e.g. 85 for 85%">
-            </div>
-
-            <!-- 12. Owner Occupied Units -->
-            <div class="input-box">
-                <label for="ownerOccupied">Owner Occupied Units</label>
-                <input type="number" id="ownerOccupied" placeholder="Enter number of occupied units">
-            </div>
-
-            <!-- 13. Median Age of Housing -->
-            <div class="input-box">
-                <label for="medianAge">Median Age of Housing Units</label>
-                <input type="number" id="medianAge" placeholder="Enter median housing age">
-            </div>
-
-            <!-- 14. Purchaser Type -->
-            <div class="input-box">
-                <label for="purchaserType">Purchaser Type</label>
-                <select id="purchaserType">
-                    <option value="">Select</option>
-                    <option value="0">0 - Not originated/sold</option>
-                    <option value="1">1 - Fannie Mae</option>
-                    <option value="2">2 - Ginnie Mae</option>
-                    <option value="3">3 - Freddie Mac</option>
-                    <option value="4">4 - Farmer Mac</option>
-                    <option value="5">5 - Private Securitization</option>
-                    <option value="6">6 - Bank/Credit Union</option>
-                    <option value="7">7 - Insurance Company</option>
-                    <option value="8">8 - Affiliate Institution</option>
-                    <option value="9">9 - Other</option>
-                </select>
             </div>
 
             <!-- 15. Applicant Credit Score Type -->
@@ -164,52 +148,6 @@
                 </select>
             </div>
 
-            <!-- 17-27: All Yes/No Dropdowns -->
-            <div class="input-box">
-                <label for="preapproval">Preapproval</label>
-                <select id="preapproval">
-                    <option value="">Select</option>
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-            </div>
-
-            <div class="input-box">
-                <label for="negativeAmortization">Negative Amortization</label>
-                <select id="negativeAmortization">
-                    <option value="">Select</option>
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-            </div>
-
-            <div class="input-box">
-                <label for="interestOnly">Interest Only Payment</label>
-                <select id="interestOnly">
-                    <option value="">Select</option>
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-            </div>
-
-            <div class="input-box">
-                <label for="balloonPayment">Balloon Payment</label>
-                <select id="balloonPayment">
-                    <option value="">Select</option>
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-            </div>
-
-            <div class="input-box">
-                <label for="otherFeatures">Other Nonamortizing Features</label>
-                <select id="otherFeatures">
-                    <option value="">Select</option>
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-            </div>
-
             <div class="input-box">
                 <label for="applicantAge62">Applicant Age ≥ 62</label>
                 <select id="applicantAge62">
@@ -229,8 +167,59 @@
             </div>
 
             <div class="input-box">
+                <label for="loan_purpose">Loan purpose</label>
+                <select id="loan_purpose">
+                    <option value="">Select</option>
+                    <option value="2">Home Improvement</option>
+                    <option value="4">Other Purpose</option>
+                    <option value="5">Construction</option>
+                    <option value="31">Cash-Out Refinance</option>
+                    <option value="32">Other Refinance</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="loan_type">Loan type</label>
+                <select id="loan_type">
+                    <option value="">Select</option>
+                    <option value="2">FHA-insured loan</option>
+                    <option value="3">VA-guaranteed loan</option>
+                    <option value="4">USDA/RHS-insured loan</option>
+
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="occupancy_type_2">Occupancy type</label>
+                <select id="occupancy_type_2">
+                    <option value="">Select</option>
+                    <option value="2">Second residence</option>
+                    <option value="3">Investment property</option>
+                    <option value="1111">Not applicable</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="derived_loan_product_type_Conventional:Subordinate Lien">Conventional: Subordinate Lien</label>
+                <select id="derived_loan_product_type_Conventional:Subordinate Lien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
                 <label for="fhaLien">FHA: First Lien</label>
                 <select id="fhaLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="fhaSubordinateLien">FHA: Subordinate Lien</label>
+                <select id="fhaSubordinateLien">
                     <option value="">Select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
@@ -247,8 +236,26 @@
             </div>
 
             <div class="input-box">
+                <label for="fsaSubordinateLien">FSA/RHS: Subordinate Lien</label>
+                <select id="fsaSubordinateLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
                 <label for="vaLien">VA: First Lien</label>
                 <select id="vaLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="vaSubordinateLien">VA: Subordinate Lien</label>
+                <select id="vaSubordinateLien">
                     <option value="">Select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
@@ -265,8 +272,8 @@
             </div>
 
             <div class="input-box">
-                <label for="openEndCredit">Open-end Line of Credit</label>
-                <select id="openEndCredit">
+                <label for="derived_dwelling_category_Single Family (1-4 Units):Site-Built">Single Family (1-4 Units):Site-Built</label>
+                <select id="derived_dwelling_category_Single Family (1-4 Units):Site-Built">
                     <option value="">Select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
@@ -274,8 +281,8 @@
             </div>
 
             <div class="input-box">
-                <label for="reverseMortgage">Reverse Mortgage</label>
-                <select id="reverseMortgage">
+                <label for="derived_dwelling_category_Single Family (1-4 Units):Manufactured">Single Family (1-4 Units):Manufactured</label>
+                <select id="derived_dwelling_category_Single Family (1-4 Units):Manufactured">
                     <option value="">Select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
@@ -286,5 +293,68 @@
         <!-- Submit Button -->
         <button class="submit-btn">Submit</button>
     </div>
+
+    <script>
+    document.querySelector('.submit-btn').addEventListener('click', async function () {
+        const loan_purpose = document.getElementById('loan_purpose').value;
+        const loan_type = document.getElementById('loan_type').value;
+    
+        const data = {
+            debt_to_income_ratio: parseFloat(document.getElementById('debt_to_income_ratio').value),
+            loan_to_value_ratio: parseFloat(document.getElementById('loanToValue').value),
+            interest_rate: parseFloat(document.getElementById('interestRate').value),
+            loan_amount: parseFloat(document.getElementById('loanAmount').value),
+            rate_spread: parseFloat(document.getElementById('rate_spread').value),
+            total_loan_costs: parseFloat(document.getElementById('total_loan_costs').value),
+            origination_charges: parseFloat(document.getElementById('origination_charges').value),
+            loan_term: parseInt(document.getElementById('loanTerm').value),
+            income: parseFloat(document.getElementById('income').value),
+            property_value: parseFloat(document.getElementById('propertyValue').value),
+            applicant_credit_score_type: parseInt(document.getElementById('applicantCreditScore').value),
+            co_applicant_credit_score_type: parseInt(document.getElementById('coApplicantCreditScore').value),
+            co_applicant_age: parseInt(document.getElementById('co-applicant_age').value),
+            applicant_age_above_62: parseInt(document.getElementById('applicantAge62').value),
+            co_applicant_age_above_62: parseInt(document.getElementById('coApplicantAge62').value),
+    
+            loan_type_2: (loan_type === "2") ? 1 : 0,
+            loan_type_3: (loan_type === "3") ? 1 : 0,
+            loan_type_4: (loan_type === "4") ? 1 : 0,
+    
+            loan_purpose_2: (loan_purpose === "2") ? 1 : 0,
+            loan_purpose_4: (loan_purpose === "4") ? 1 : 0,
+            loan_purpose_5: (loan_purpose === "5") ? 1 : 0,
+            loan_purpose_31: (loan_purpose === "31") ? 1 : 0,
+            loan_purpose_32: (loan_purpose === "32") ? 1 : 0,
+    
+            "derived_loan_product_type_Conventional:Subordinate_Lien": parseInt(document.getElementById('derived_loan_product_type_Conventional:Subordinate Lien').value),
+            "derived_loan_product_type_FHA:First_Lien": parseInt(document.getElementById('fhaLien').value),
+            "derived_loan_product_type_FHA:Subordinate_Lien": parseInt(document.getElementById('fhaSubordinateLien').value),
+            "derived_loan_product_type_FSA/RHS:First_Lien": parseInt(document.getElementById('fsaLien').value),
+            "derived_loan_product_type_FSA/RHS:Subordinate_Lien": parseInt(document.getElementById('fsaSubordinateLien').value),
+            "derived_loan_product_type_VA:First_Lien": parseInt(document.getElementById('vaLien').value),
+           "derived_loan_product_type_VA:Subordinate_Lien": parseInt(document.getElementById('vaSubordinateLien').value),
+    
+            occupancy_type_2: (document.getElementById('occupancy_type_2').value === "2") ? 1 : 0,
+            occupancy_type_3: (document.getElementById('occupancy_type_2').value === "3") ? 1 : 0,
+    
+            "derived_dwelling_category_Multifamily:Site-Built": parseInt(document.getElementById('multifamilyDwelling').value),
+            "derived_dwelling_category_Single Family (1-4 Units):Manufactured": parseInt(document.getElementById('derived_dwelling_category_Single Family (1-4 Units):Manufactured').value),
+            "derived_dwelling_category_Single Family (1-4 Units):Site-Built": parseInt(document.getElementById('derived_dwelling_category_Single Family (1-4 Units):Site-Built').value),
+    
+            "derived_msa-md": parseInt(document.getElementById('co-derived_msa-md').value),
+            tract_minority_population_percent: parseFloat(document.getElementById('tractMinorityPercent').value),
+            ffiec_msa_md_median_family_income: parseFloat(document.getElementById('medianFamilyIncome').value)
+        };
+    
+        try {
+            const response = await axios.post('http://localhost:5000/predict_borrower_risk', data);
+            alert(`Risk Classification: ${response.data.risk_classification}`);
+        } catch (error) {
+            console.error(error);
+            alert('Error connecting to the server.');
+        }
+    });
+    </script>
+    
 </body>
 </html>
