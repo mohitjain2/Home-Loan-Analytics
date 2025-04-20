@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Value Prediction</title>
     <link rel="stylesheet" href="resources/css/predictions.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -15,6 +15,7 @@
     <div class="container">
         <h2>User Dashboard</h2>
         <p>Welcome to the Loan Insight Prediction Portal. Use our tools to explore property value chances.</p>
+        <form id="loanForm">
         <div class="input-boxes">
 
             <!-- First Name -->
@@ -59,12 +60,6 @@
                 <input type="number" id="loanTerm" placeholder="Enter loan term in months">
             </div>
 
-            <!-- 5. Property Value -->
-            <div class="input-box">
-                <label for="propertyValue">Property Value</label>
-                <input type="number" id="propertyValue" placeholder="Enter property value">
-            </div>
-
             <!-- 6. Total Units -->
             <div class="input-box">
                 <label for="totalUnits">Total Units</label>
@@ -101,6 +96,11 @@
                 <input type="number" id="tractToMsaIncome" placeholder="e.g. 85 for 85%">
             </div>
 
+            <div class="input-box">
+                <label for="co-applicant_age">Co-Applicant age</label>
+                <input type="number" id="co-applicant_age" placeholder="Enter Co-Applicant age">
+            </div>
+
             <!-- 12. Owner Occupied Units -->
             <div class="input-box">
                 <label for="ownerOccupied">Owner Occupied Units</label>
@@ -128,6 +128,7 @@
                     <option value="7">7 - Insurance Company</option>
                     <option value="8">8 - Affiliate Institution</option>
                     <option value="9">9 - Other</option>
+                    <option value="10">10 - Not Applicable</option>
                 </select>
             </div>
 
@@ -228,8 +229,26 @@
             </div>
 
             <div class="input-box">
+                <label for="conventionalSubordinateLien">Conventional: Subordinate Lien</label>
+                <select id="conventionalSubordinateLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
                 <label for="fhaLien">FHA: First Lien</label>
                 <select id="fhaLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="fhaSubordinateLien">FHA: Subordinate Lien</label>
+                <select id="fhaSubordinateLien">
                     <option value="">Select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
@@ -246,8 +265,26 @@
             </div>
 
             <div class="input-box">
+                <label for="fsaSubordinateLien">FSA: Subordinate Lien</label>
+                <select id="fsaSubordinateLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
                 <label for="vaLien">VA: First Lien</label>
                 <select id="vaLien">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="vaSubordinateLien">VA: Subordinate Lien</label>
+                <select id="vaSubordinateLien">
                     <option value="">Select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
@@ -260,6 +297,64 @@
                     <option value="">Select</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="singlefamilyDwelling">Single family: Mahufactured</label>
+                <select id="singlefamilyDwelling">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="conforming_loan_limit">Conforming loan limit</label>
+                <select id="conforming_loan_limit">
+                    <option value="">Select</option>
+                    <option value="0">Not Conforming</option>
+                    <option value="1">Comforming</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="loan_purpose">Loan purpose</label>
+                <select id="loan_purpose">
+                    <option value="">Select</option>
+                    <option value="2">Home Improvement</option>
+                    <option value="4">Other Purpose</option>
+                    <option value="5">Construction</option>
+                    <option value="31">Cash-Out Refinance</option>
+                    <option value="32">Other Refinance</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="occupancy_type_2">Occupancy type</label>
+                <select id="occupancy_type_2">
+                    <option value="">Select</option>
+                    <option value="2">Second residence</option>
+                    <option value="3">Investment property</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="manufactured_home_secured_property_type">Manufactured Home Secured Property</label>
+                <select id="manufactured_home_secured_property_type">
+                    <option value="">Select</option>
+                    <option value="2">Home Only</option>
+                    <option value="1111">N/A</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="manufactured_home_land_property_interest">Manufactured Home Land Property</label>
+                <select id="manufactured_home_land_property_interest">
+                    <option value="">Select</option>
+                    <option value="2">Indirect Ownership</option>
+                    <option value="3">Paid Leashold</option>
+                    <option value="4">Unpaid Leashold</option>
                 </select>
             </div>
 
@@ -280,10 +375,152 @@
                     <option value="1">Yes</option>
                 </select>
             </div>
+            <div class="input-box">
+                <label for="submission_of_application">Submission of Applicatoion</label>
+                <select id="submission_of_application">
+                    <option value="">Select</option>
+                    <option value="2">Submitted via broker</option>
+                    <option value="1111">N/A</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label for="initially_payable_to_institution_2">Initially Payable to Institution</label>
+                <select id="initially_payable_to_institution_2">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+    
+            <div class="input-box">
+                <label for="business_or_commercial_purpose">Loan is for Business/Commercial Purpose?</label>
+                <select id="business_or_commercial_purpose">
+                    <option value="">Select</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
         </div>
-
         <!-- Submit Button -->
         <button class="submit-btn">Submit</button>
+    </form>
     </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+          document.getElementById('loanForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (!this.checkValidity()) {
+              this.reportValidity();
+              return;
+            }
+            console.log("Form submitted");
+        
+            // 1) Grab the right IDs (with “_2” suffixes) and .value
+            const loan_purpose = document.getElementById('loan_purpose').value;
+            const submission = document.getElementById('submission_of_application').value;
+            const occupancy = document.getElementById('occupancy_type_2').value;               // <-- was occupancy_type
+            const mhspt = document.getElementById('manufactured_home_secured_property_type').value;
+            const mhlpi = document.getElementById('manufactured_home_land_property_interest').value;
+            const conforming = document.getElementById('conforming_loan_limit').value;         // <-- added .value
+            const conventional = document.getElementById('conventionalSubordinateLien').value;
+            const fhaLien      = document.getElementById('fhaLien').value;
+            const fhaSub       = document.getElementById('fhaSubordinateLien').value;
+            const fsaLien      = document.getElementById('fsaLien').value;
+            const fsaSub       = document.getElementById('fsaSubordinateLien').value;
+            const vaLien       = document.getElementById('vaLien').value;
+            const vaSub        = document.getElementById('vaSubordinateLien').value;
+            const multiDw      = document.getElementById('multifamilyDwelling').value;
+            const singleDw     = document.getElementById('singlefamilyDwelling').value;
+
+        
+            const data = {
+              purchaser_type:                parseInt(document.getElementById('purchaserType').value),
+              preapproval:                   parseInt(document.getElementById('preapproval').value),
+              reverse_mortgage:              parseInt(document.getElementById('reverseMortgage').value),
+              'open-end_line_of_credit':     parseInt(document.getElementById('openEndCredit').value),
+              business_or_commercial_purpose:parseInt(document.getElementById('business_or_commercial_purpose').value),
+              loan_amount:                   parseFloat(document.getElementById('loanAmount').value),
+              loan_to_value_ratio:           parseFloat(document.getElementById('loanToValue').value),
+              interest_rate:                 parseFloat(document.getElementById('interestRate').value),
+              loan_term:                     parseInt(document.getElementById('loanTerm').value),
+              negative_amortization:         parseInt(document.getElementById('negativeAmortization').value),
+              interest_only_payment:         parseInt(document.getElementById('interestOnly').value),
+              balloon_payment:               parseInt(document.getElementById('balloonPayment').value),
+              other_nonamortizing_features:  parseInt(document.getElementById('otherFeatures').value),
+              total_units:                   parseInt(document.getElementById('totalUnits').value),
+              income:                        parseFloat(document.getElementById('income').value),
+              applicant_credit_score_type:   parseInt(document.getElementById('applicantCreditScore').value),
+              'co-applicant_credit_score_type': parseInt(document.getElementById('coApplicantCreditScore').value),
+              'co-applicant_age':             parseInt(document.getElementById('co-applicant_age').value),
+              applicant_age_above_62:         parseInt(document.getElementById('applicantAge62').value),
+              'co-applicant_age_above_62':      parseInt(document.getElementById('coApplicantAge62').value),
+              tract_population:               parseInt(document.getElementById('tractPopulation').value),
+              tract_minority_population_percent: parseFloat(document.getElementById('tractMinorityPercent').value),
+              ffiec_msa_md_median_family_income: parseFloat(document.getElementById('medianFamilyIncome').value),
+              tract_to_msa_income_percentage: parseFloat(document.getElementById('tractToMsaIncome').value),
+              tract_owner_occupied_units:    parseInt(document.getElementById('ownerOccupied').value),
+              tract_median_age_of_housing_units: parseInt(document.getElementById('medianAge').value),
+
+              // derived loan product types
+                'derived_loan_product_type_Conventional:Subordinate Lien':conventional === "1" ? 1 : 0,
+                'derived_loan_product_type_FHA:First Lien':fhaLien === "1" ? 1 : 0,
+                'derived_loan_product_type_FHA:Subordinate Lien':fhaSub === "1" ? 1 : 0,
+                'derived_loan_product_type_FSA/RHS:First Lien':fsaLien === "1" ? 1 : 0,
+                'derived_loan_product_type_FSA/RHS:Subordinate Lien':fsaSub === "1" ? 1 : 0,
+                'derived_loan_product_type_VA:First Lien':vaLien === "1" ? 1 : 0,
+                'derived_loan_product_type_VA:Subordinate Lien':vaSub === "1" ? 1 : 0,
+
+// derived dwelling categories
+'derived_dwelling_category_Multifamily:Site-Built':
+    multiDw === "1" ? 1 : 0,
+'derived_dwelling_category_Single Family (1-4 Units):Manufactured':
+    singleDw === "1" ? 1 : 0,
+
+        
+              // 2) Correct the conforming flags (no parseInt on boolean)
+              conforming_loan_limit_NC: (conforming === "0") ? 1 : 0,
+              conforming_loan_limit_U:  (conforming === "1") ? 1 : 0,
+        
+              // 3) Reuse the constants for manufactured-home flags
+              manufactured_home_secured_property_type_2:   (mhspt === "2") ? 1 : 0,
+              manufactured_home_secured_property_type_1111:(mhspt === "1111") ? 1 : 0,
+              manufactured_home_land_property_interest_2:   (mhlpi === "2") ? 1 : 0,
+              manufactured_home_land_property_interest_3:   (mhlpi === "3") ? 1 : 0,
+              manufactured_home_land_property_interest_4:   (mhlpi === "4") ? 1 : 0,
+        
+              // 4) Toggle occupancy based on occupancy_type_2
+              occupancy_type_2: (occupancy === "2") ? 1 : 0,
+              occupancy_type_3: (occupancy === "3") ? 1 : 0,
+        
+              // 5) Use your loan_purpose constant instead of repeating getElementById
+              loan_purpose_2:  (loan_purpose === "2")  ? 1 : 0,
+              loan_purpose_4:  (loan_purpose === "4")  ? 1 : 0,
+              loan_purpose_5:  (loan_purpose === "5")  ? 1 : 0,
+              loan_purpose_31: (loan_purpose === "31") ? 1 : 0,
+              loan_purpose_32: (loan_purpose === "32") ? 1 : 0,
+        
+              submission_of_application_2:  (submission === "2")    ? 1 : 0,
+              submission_of_application_1111:(submission === "1111")? 1 : 0,
+        
+              initially_payable_to_institution_2: parseInt(document.getElementById('initially_payable_to_institution_2').value)
+            };
+        
+            try {
+              const res = await axios.post(
+                'http://localhost:5000/predict_property_value',
+                data
+              );
+              console.log("Server response:", res.data);
+              alert(`Predicted Property Value: $${res.data.predicted_property_value}`);
+            } catch (err) {
+              console.error(err);
+              alert("Error submitting form. Check your inputs or try again.");
+            }
+          });
+        });
+        </script>
+        
+
 </body>
 </html>

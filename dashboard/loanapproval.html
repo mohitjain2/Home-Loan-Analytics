@@ -356,76 +356,61 @@
             event.preventDefault();
         
             if (!this.checkValidity()) {
-                this.reportValidity(); // Shows built-in error messages
+                this.reportValidity();
                 return;
             }
         
             const loan_purpose = document.getElementById('loan_purpose').value;
-            const aus = document.getElementById('aus').value;
+            const loan_type = document.getElementById('loan_type').value;
         
             const data = {
-                purchaser_type: parseInt(document.getElementById('purchaserType').value),
-                preapproval: parseInt(document.getElementById('preapproval').value),
-                reverse_mortgage: parseInt(document.getElementById('reverseMortgage').value),
-                open_end_line_of_credit: parseInt(document.getElementById('openEndCredit').value),
-                loan_amount: parseFloat(document.getElementById('loanAmount').value),
-                loan_to_value_ratio: parseFloat(document.getElementById('loanToValue').value),
                 interest_rate: parseFloat(document.getElementById('interestRate').value),
+                loan_amount: parseFloat(document.getElementById('loanAmount').value),
                 loan_term: parseInt(document.getElementById('loanTerm').value),
+                
+                loan_purpose_2: (loan_purpose === "2") ? 1 : 0,
+                loan_purpose_4: (loan_purpose === "4") ? 1 : 0,
+                loan_purpose_5: (loan_purpose === "5") ? 1 : 0,
+        
+                loan_type_2: (loan_type === "2") ? 1 : 0,
+                loan_type_3: (loan_type === "3") ? 1 : 0,
+        
+                lien_status_2: parseInt(document.getElementById('lien_status_2').value),
                 negative_amortization: parseInt(document.getElementById('negativeAmortization').value),
                 interest_only_payment: parseInt(document.getElementById('interestOnly').value),
                 balloon_payment: parseInt(document.getElementById('balloonPayment').value),
                 other_nonamortizing_features: parseInt(document.getElementById('otherFeatures').value),
-                property_value: parseFloat(document.getElementById('propertyValue').value),
-                total_units: parseInt(document.getElementById('totalUnits').value),
-                income: parseFloat(document.getElementById('income').value),
+                conforming_loan_limit_NC: parseInt(document.getElementById('conforming_loan_limit_NC').value),
+        
+                ['derived_loan_product_type_Conventional:Subordinate Lien']: parseInt(document.getElementById('derived_loan_product_type_Conventional:Subordinate Lien').value),
+                ['derived_loan_product_type_FHA:First Lien']: parseInt(document.getElementById('fhaLien').value),
+                ['derived_loan_product_type_VA:First Lien']: parseInt(document.getElementById('vaLien').value),
+                ['derived_loan_product_type_VA:Subordinate Lien']: parseInt(document.getElementById('vaSubordinateLien').value),
+        
                 applicant_credit_score_type: parseInt(document.getElementById('applicantCreditScore').value),
-                co_applicant_credit_score_type: parseInt(document.getElementById('coApplicantCreditScore').value),
+                ['co-applicant_credit_score_type']: parseInt(document.getElementById('coApplicantCreditScore').value),
+                ['co-applicant_age']: parseInt(document.getElementById('co-applicant_age').value),
                 applicant_age_above_62: parseInt(document.getElementById('applicantAge62').value),
-                co_applicant_age_above_62: parseInt(document.getElementById('coApplicantAge62').value),
-                tract_population: parseInt(document.getElementById('tractPopulation').value),
-                tract_minority_population_percent: parseFloat(document.getElementById('tractMinorityPercent').value),
-                ffiec_msa_md_median_family_income: parseFloat(document.getElementById('medianFamilyIncome').value),
-                tract_to_msa_income_percentage: parseFloat(document.getElementById('tractToMsaIncome').value),
-                tract_owner_occupied_units: parseInt(document.getElementById('ownerOccupied').value),
-                tract_median_age_of_housing_units: parseInt(document.getElementById('medianAge').value),
-                derived_loan_product_type_FHA_First_Lien: parseInt(document.getElementById('fhaLien').value),
-                derived_loan_product_type_FSA_RHS_First_Lien: parseInt(document.getElementById('fsaLien').value),
-                derived_loan_product_type_VA_First_Lien: parseInt(document.getElementById('vaLien').value),
-                derived_dwelling_category_Multifamily_Site_Built: parseInt(document.getElementById('multifamilyDwelling').value),
-                derived_dwelling_category_SingleFamily_Manufactured: parseInt(document.getElementById('derived_dwelling_category_Single Family (1-4 Units):Manufactured').value),
+                occupancy_type_3: parseInt(document.getElementById('occupancy_type_3').value),
         
-                loan_purpose_2: (loan_purpose === "2") ? 1 : 0,
-                loan_purpose_4: (loan_purpose === "4") ? 1 : 0,
-                loan_purpose_5: (loan_purpose === "5") ? 1 : 0,
-                loan_purpose_31: (loan_purpose === "31") ? 1 : 0,
-                loan_purpose_32: (loan_purpose === "32") ? 1 : 0,
-        
-                occupancy_type_2: (document.getElementById('occupancy_type_2').value === "2") ? 1 : 0,
-                occupancy_type_3: (document.getElementById('occupancy_type_2').value === "3") ? 1 : 0,
-        
-                submission_of_application_2: parseInt(document.getElementById('submission_of_application_2').value),
-                initially_payable_to_institution_2: parseInt(document.getElementById('initially_payable_to_institution_2').value),
-        
-                aus_1_2: (aus === "2") ? 1 : 0,
-                aus_1_3: (aus === "3") ? 1 : 0,
-                aus_1_4: (aus === "4") ? 1 : 0,
-                aus_1_5: (aus === "5") ? 1 : 0,
-                aus_1_6: (aus === "6") ? 1 : 0,
-                aus_1_7: (aus === "7") ? 1 : 0,
-        
-                creditScore: parseInt(document.getElementById('creditScore').value)
+                manufactured_home_secured_property_type_2: parseInt(document.getElementById('manufactured_home_secured_property_type_2').value),
+                manufactured_home_land_property_interest_3: parseInt(document.getElementById('manufactured_home_land_property_interest_3').value),
+                submission_of_application_3: parseInt(document.getElementById('submission_of_application_3').value),
+                initially_payable_to_institution_3: parseInt(document.getElementById('initially_payable_to_institution_3').value),
+                purchaser_type: parseInt(document.getElementById('purchaserType').value),
+                business_or_commercial_purpose: parseInt(document.getElementById('business_or_commercial_purpose').value),
+                ['open-end_line_of_credit']: parseInt(document.getElementById('openEndCredit').value),
+                reverse_mortgage: parseInt(document.getElementById('reverseMortgage').value)
             };
         
             try {
-                const response = await axios.post('http://localhost:5000/predict', data);
-                alert(`Loan Approval: ${response.data.approval_status === 0 || response.data.approval_status === 1 ? 'Approved ✅' : 'Not Approved ❌'}`);
+                const response = await axios.post('http://localhost:5000/predict_interest_rate', data);
+                alert(`Predicted Interest Rate: ${response.data.predicted_interest_rate.toFixed(2)}%`);
             } catch (error) {
                 alert('Error connecting to server: ' + error);
             }
         });
-        </script>
-                     
+        </script>                     
 
 </body>
 </html>
