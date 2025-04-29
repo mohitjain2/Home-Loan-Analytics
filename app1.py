@@ -7,12 +7,12 @@ import dash_bootstrap_components as dbc
 from pages import page1_overview, page2_demographics, page4_geographic, page5_denials
 
 # Initialize Dash app
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-app.title = "Home Loan Analytics Dashboard"
-server = app.server
+app1 = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app1.title = "Home Loan Analytics Dashboard"
+server = app1.server
 
 # Layout with Tabs
-app.layout = dbc.Container([
+app1.layout = dbc.Container([
     html.H1("🏠 Home Loan Analytics", className="text-center my-4"),
 
     dbc.Tabs([
@@ -27,7 +27,7 @@ app.layout = dbc.Container([
 ], fluid=True)
 
 # Callback to switch between pages
-@app.callback(
+@app1.callback(
     Output("page-content", "children"),
     Input("tabs", "active_tab")
 )
@@ -50,4 +50,4 @@ def render_tab_content(active_tab):
 
 if __name__ == "__main__":
     print("Running app...")
-    app.run(debug=True)
+    app1.run(debug=True)

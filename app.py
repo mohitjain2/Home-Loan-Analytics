@@ -2,6 +2,12 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
 import numpy as np
+import dash
+from dash import dcc, html, Input, Output
+import dash_bootstrap_components as dbc
+
+# Import pages
+from pages import page1_overview, page2_demographics, page4_geographic, page5_denials
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend-backend communication
@@ -247,3 +253,5 @@ def predict_property_value():
 
 if __name__ == '__main__':
     app.run(host='localhost', port=5000, debug=True)
+    print("Running app...")
+  
