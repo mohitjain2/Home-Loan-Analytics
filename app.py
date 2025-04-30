@@ -6,9 +6,6 @@ import dash
 from dash import dcc, html, Input, Output
 import dash_bootstrap_components as dbc
 
-# Import pages
-from pages import page1_overview, page2_demographics, page4_geographic, page5_denials
-
 app = Flask(__name__)
 CORS(app)  # Enable CORS for frontend-backend communication
 
