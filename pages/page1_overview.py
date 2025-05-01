@@ -191,13 +191,13 @@ layout = html.Div([
             dbc.CardBody([
             dcc.Graph(id="line-total-apps", style={"height": "400px"})
             ])
-        ], className="graph-card")),
+        ], className="graph-card"), width=6),
 
         dbc.Col(dbc.Card([
             dbc.CardBody([
                 dcc.Graph(id="state-map", style={"height": "450px", "margin-bottom": "0"})
             ])
-        ], className="graph-card"))
+        ], className="graph-card"), width=6)
     ])
 ])
 

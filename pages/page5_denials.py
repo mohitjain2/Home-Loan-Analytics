@@ -3,88 +3,19 @@ import pandas as pd
 import plotly.express as px
 from dash import html, dcc, Input, Output, callback
 import dash_bootstrap_components as dbc
-import sqlite3
 
 # ─── Dev loader (first ~200k rows) ─────────────────────────────────────────
-# Development mode limit
-def load_chunked_data_from_db(db_path,table_name,columns,chunksize=100_000,max_rows=2_350_000):
-    """
-    Streams specified columns from a SQLite table in chunks,
-    stopping once max_rows have been read.
-    """
-    # Quote each column for SQLite (handles hyphens, etc.)
-    quoted_cols = ', '.join(f'"{col}"' for col in columns)
-
-    conn = sqlite3.connect(db_path)
-    chunks = []
-    total_rows = 0
-
-    # Stream in chunks of only the selected columns
-    sql = f'SELECT {quoted_cols} FROM "{table_name}"'
-    for chunk in pd.read_sql_query(sql, conn, chunksize=chunksize):
-        chunks.append(chunk)
-        total_rows += len(chunk)
-        if max_rows is not None and total_rows >= max_rows:
+def load_chunked_data(path, chunksize=20000, max_rows=2000000):
+    pieces, total = [], 0
+    for chunk in pd.read_csv(path, chunksize=chunksize, low_memory=False):
+        pieces.append(chunk)
+        total += len(chunk)
+        if total >= max_rows:
             break
+    return pd.concat(pieces, ignore_index=True)
 
-    conn.close()
-    return pd.concat(chunks, ignore_index=True)
-
-# Load Data from SQLite instead of CSV
-columns = [
-    'activity_year',
-    'derived_msa-md',
-    'state_code',
-    'conforming_loan_limit',
-    'derived_loan_product_type',
-    'derived_dwelling_category',
-    'derived_ethnicity',
-    'derived_race',
-    'derived_sex',
-    'action_taken',
-    'loan_type',
-    'loan_purpose',
-    'lien_status',
-    'loan_amount',
-    'loan_to_value_ratio',
-    'interest_rate',
-    'rate_spread',
-    'hoepa_status',
-    'total_loan_costs',
-    'origination_charges',
-    'loan_term',
-    'property_value',
-    'construction_method',
-    'occupancy_type',
-    'manufactured_home_secured_property_type',
-    'manufactured_home_land_property_interest',
-    'total_units',
-    'income',
-    'debt_to_income_ratio',
-    'applicant_credit_score_type',
-    'applicant_sex',
-    'applicant_age',
-    'applicant_age_above_62',
-    'denial_reason-1',
-    'source_year'
-]
-
-# you can tweak max_rows (e.g. to None) once you’re ready to load full table
-df = load_chunked_data_from_db(
-    db_path='my_database.db',
-    table_name='downsample_random',
-    columns=columns,
-    chunksize=100000,
-    max_rows=2500000
-)
-
-# Map action codes to labels
-action_labels = {
-    1: 'Loan Approved',
-    2: 'Approved but Not Accepted',
-    3: 'Denied',
-    8: 'Preapproval Approved but Not Accepted'
-}
+# ─── Data Load & Prep ──────────────────────────────────────────────────────
+df = load_chunked_data("downsampled_2M.csv")
 df["activity_year"] = pd.to_numeric(df["activity_year"], errors="coerce")
 df["interest_rate"]  = pd.to_numeric(df["interest_rate"], errors="coerce")
 df["derived_loan_product_type"] = df["derived_loan_product_type"].astype(str).str.strip()
